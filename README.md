@@ -4,7 +4,7 @@ Inspired from project [Candlestick](https://github.com/EdouardTack/candlestick)
 
 This is a switch and stylish React component that create checkbox into toggle switch button. This plugin allows to choose between three options. The toggle button switch with CSS animation.
 
-![alt text](./example.png "Candlestick position")
+![Candlestick example](https://raw.githubusercontent.com/EdouardTack/react-candlestick/master/example.png "Candlestick position")
 
 ## Install
 
