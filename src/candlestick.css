@@ -20,14 +20,15 @@
     height: auto;
 }
 
-/*.candlestick-wrapper .candlestick-bg.candlestick-disabled {*/
-/*    cursor: not-allowed;*/
-/*    opacity: 0.4;*/
-/*}*/
+.candlestick-wrapper .candlestick-bg.candlestick-disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
 
-/*.candlestick-wrapper .candlestick-bg.candlestick-readonly {*/
-/*    opacity: 0.7;*/
-/*}*/
+.candlestick-wrapper .candlestick-bg.candlestick-readonly {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
 
 /* !!! */
 /* ! DEFAULT MODE ! */
@@ -85,9 +86,14 @@
 .candlestick-wrapper .candlestick-bg .candlestick-off,
 .candlestick-wrapper .candlestick-bg .candlestick-neutral,
 .candlestick-wrapper .candlestick-bg .candlestick-on {
-    cursor: pointer;
     display: inline-block;
     vertical-align: middle;
     height: 16px;
     width: 18px;
+}
+
+.candlestick-wrapper .candlestick-bg:not(.candlestick-readonly):not(.candlestick-disabled) .candlestick-off,
+.candlestick-wrapper .candlestick-bg:not(.candlestick-readonly):not(.candlestick-disabled) .candlestick-neutral,
+.candlestick-wrapper .candlestick-bg:not(.candlestick-readonly):not(.candlestick-disabled) .candlestick-on {
+    cursor: pointer;
 }

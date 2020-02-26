@@ -75,7 +75,50 @@ const Candlestick = (props) => {
             setPosition('neutral');
         }
         setValue(value);
-    }, []);
+    }, [neutralValue, offValue, onValue, value]);
+
+    /**
+     * Check if we can turn the toggle.
+     * We can't if is in disabled or readonly mode
+     * @returns {boolean}
+     */
+    const canTurn = () => {
+        return !isDisabled() && !isReadOnly();
+    };
+
+    /**
+     * Get className for candlestick template
+     * @returns {string}
+     */
+    const getClassNameBg = () => {
+        const classNames = ['candlestick-bg', 'candlestick-bg-' + position];
+
+        if (isDisabled()) {
+            classNames.push('candlestick-disabled');
+        }
+
+        if (isReadOnly()) {
+            classNames.push('candlestick-readonly');
+        }
+
+        return classNames.join(' ');
+    };
+
+    /**
+     * Check if is disabled
+     * @returns {Boolean}
+     */
+    const isDisabled = () => {
+        return props.disabled || false;
+    };
+
+    /**
+     * Check if is in readonly mode
+     * @returns {Boolean}
+     */
+    const isReadOnly = () => {
+        return props.readonly || false;
+    };
 
     /**
      * Callback of turn candlestick value
@@ -84,9 +127,11 @@ const Candlestick = (props) => {
      * @return {void}
      */
     const turnCallback = (value, position) => {
-        setPosition(position);
-        setValue(value);
-        onChange(value);
+        if (canTurn()) {
+            setPosition(position);
+            setValue(value);
+            onChange(value);
+        }
     };
 
     /**
@@ -104,12 +149,35 @@ const Candlestick = (props) => {
     const turnNeutral = () => {
         turnCallback(neutralValue, 'neutral');
     };
+
     /**
      * When deactivate
      * @return {void}
      */
     const turnOff = () => {
         turnCallback(offValue, 'off');
+    };
+
+    /**
+     * Render input[type="hidden"] with his properties
+     * @returns {*}
+     */
+    const renderInputHidden = () => {
+        const options = {
+            name: id,
+            type: "hidden",
+            value
+        };
+
+        if (isDisabled()) {
+            options['disabled'] = 'disabled';
+        }
+
+        if (isReadOnly()) {
+            options['readOnly'] = 'readonly';
+        }
+
+        return <input { ...options } />;
     };
 
     /**
@@ -120,15 +188,18 @@ const Candlestick = (props) => {
         return <div className={'candlestick-toggle candlestick-position-' + position} />;
     };
 
+    /**
+     * Rendering Hook
+     */
     return (
         <div className="candlestick-wrapper candlestick-contents">
-            <div id={id} className={'candlestick-bg candlestick-bg-' + position}>
+            <div id={id} className={getClassNameBg()}>
                 <div className="candlestick-off" onClick={turnOff} />
                 <div className="candlestick-neutral" onClick={turnNeutral} />
                 <div className="candlestick-on" onClick={turnOn} />
                 {renderToggle()}
             </div>
-            <input name={id} type="hidden" value={value} />
+            {renderInputHidden()}
         </div>
     );
 };
@@ -139,8 +210,10 @@ Candlestick.propTypes = {
         PropTypes.number,
         PropTypes.string
     ]),
+    disabled: PropTypes.bool,
     id: PropTypes.string,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    readonly: PropTypes.bool
 };
 
 export default Candlestick;

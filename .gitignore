@@ -12,7 +12,6 @@
 # production
 /build
 /public/*
-/src/App.js
 /src/index.js
 
 # misc
