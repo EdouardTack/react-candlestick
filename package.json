@@ -1,6 +1,6 @@
 {
   "name": "react-candlestick",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "This is a switch and stylish React component that create checkbox into toggle switch button.",
   "author": "Tackacoder <edouard@tackacoder.fr>",
   "homepage": "https://github.com/EdouardTack/react-candlestick#readme",
@@ -51,9 +51,6 @@
     "build": "webpack",
     "test": "react-scripts test",
     "prepublish": "yarn run build"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
   },
   "eslintConfig": {
     "extends": "react-app"
