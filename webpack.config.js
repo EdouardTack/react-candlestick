@@ -72,7 +72,7 @@ const configuration = {
     resolve: {
         extensions: ['.js', '.jsx', '.css'],
     },
-    watch: true,
+    watch: false,
     watchOptions: {
         ignored: /(node_modules|bower_components)/,
     },
